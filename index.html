@@ -88,18 +88,13 @@ nav.scrolled {
 }
 
 .nav-marca {
-  display: flex; flex-direction: column; gap: 2px;
+  display: flex; align-items: center;
   text-decoration: none;
 }
 .nav-marca-logo {
-  height: 56px; width: auto;
+  height: 64px; width: auto;
 }
-.nav-marca-sub {
-  font-family: 'Jost', sans-serif;
-  font-size: 10px; font-weight: 300;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--terracota);
-}
+.nav-marca-sub { display: none; }
 .nav-marca-nome { display: none; }
 
 .nav-links { display: flex; align-items: center; gap: 36px; }
@@ -765,10 +760,9 @@ footer {
   .hero-foto-card { border-radius: 0; box-shadow: none; height: 200px; }
   .hero-foto-principal { height: 200px; border-radius: 0; object-fit: cover; }
   .hero-foto-badge { display: none; }
-  .nav-marca-logo { height: 50px; }
-  .nav-marca-sub { display: none; }
-  .hero h1 { font-size: 28px; margin-bottom: 14px; line-height: 1.2; }
-  .hero-origem { display: none; }
+  .nav-marca-logo { height: 54px; }
+  .hero h1 { font-size: 30px; margin-bottom: 14px; line-height: 1.18; }
+  .hero-origem { margin-bottom: 14px; }
   .hero-desc { margin-bottom: 20px; font-size: 14px; line-height: 1.65; }
 
   .logo-desktop { display: none; }
@@ -855,7 +849,7 @@ footer {
       <div class="hero-origem-texto">Chapada dos Guimarães · Mato Grosso</div>
     </div>
     <h1>
-      Receitas que<br>o tempo<br><em>não apaga</em>
+      Receitas que o tempo<br><em>não apaga</em>
     </h1>
     <p class="hero-desc">
       Cucas artesanais e biscoitos caseiros feitos com as receitas alemãs que a Vovó Edela guardou por décadas. Cada encomenda, um pedaço dessa história.
