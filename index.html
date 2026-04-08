@@ -9,7 +9,24 @@
 <!-- Preconnect para performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+
+<!-- Preload das logos (LCP) -->
+<link rel="preload" as="image" href="logo.png" media="(min-width: 901px)" fetchpriority="high">
+<link rel="preload" as="image" href="logo-horizontal.png" media="(max-width: 900px)" fetchpriority="high">
+
+<!-- Fontes não-bloqueantes -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap"></noscript>
+
+<!-- CSS de fallback enquanto fontes carregam -->
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; }
+  .nav-marca-nome, .hero h1, .sobre-conteudo h2, .produto-item h3,
+  .sabor-item-nome, .step h3, .retirada-mapa h2, .cta-final h2,
+  .footer-marca { font-family: Georgia, 'Times New Roman', serif; }
+  nav, .nav-links a, .nav-btn, .btn-principal, .btn-ghost, .btn-whatsapp,
+  .hero-origem-texto, .hero-desc, .sobre-conteudo p { font-family: system-ui, sans-serif; }
+</style>
 
 <style>
 /* ─── RESET & RAIZ ─── */
@@ -817,8 +834,8 @@ footer {
 
   <div class="hero-direita">
     <div class="logo-area">
-      <img src="logo.png" alt="Doces da Vovó Edela" class="logo-desktop">
-      <img src="logo-horizontal.png" alt="Doces da Vovó Edela" class="logo-mobile">
+      <img src="logo.png" alt="Doces da Vovó Edela" class="logo-desktop" width="640" height="640" fetchpriority="high">
+      <img src="logo-horizontal.png" alt="Doces da Vovó Edela" class="logo-mobile" width="938" height="313" fetchpriority="high">
     </div>
     <div class="hero-badge">
       <div class="hero-badge-texto">Tradição familiar · Feito em casa · Receitas alemãs</div>
