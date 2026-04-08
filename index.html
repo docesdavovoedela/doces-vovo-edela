@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doces da Vovó Edela — Receitas Alemãs · Chapada dos Guimarães</title>
+<meta name="description" content="Cucas artesanais e biscoitos caseiros feitos com receitas alemãs de família. Encomendas em Chapada dos Guimarães, MT.">
+
+<!-- Preconnect para performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+
+<style>
+/* ─── RESET & RAIZ ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --canela:        #7A3B1E;
+  --terracota:     #C06A3A;
+  --creme:         #FAF5EC;
+  --creme-escuro:  #F0E6D0;
+  --creme-medio:   #EDD9BB;
+  --branco:        #FFFFFF;
+  --texto:         #2A1A10;
+  --texto-suave:   #6B4C38;
+  --borda:         rgba(122, 59, 30, 0.15);
+  --borda-forte:   rgba(122, 59, 30, 0.28);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  background: var(--branco);
+  color: var(--texto);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── TEXTURA SUTIL ─── */
+.textura::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 160px;
+  opacity: 0.6;
+}
+.textura { position: relative; }
+.textura > * { position: relative; z-index: 1; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 200;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid var(--borda);
+  padding: 0 60px;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: box-shadow 0.3s;
+}
+nav.scrolled {
+  box-shadow: 0 2px 32px rgba(122, 59, 30, 0.07);
+}
+
+.nav-marca {
+  display: flex; flex-direction: column; gap: 1px;
+  text-decoration: none;
+}
+.nav-marca-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-weight: 400;
+  color: var(--canela); letter-spacing: 0.02em;
+}
+.nav-marca-sub {
+  font-size: 10px; font-weight: 200;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--terracota);
+}
+
+.nav-links { display: flex; align-items: center; gap: 36px; }
+.nav-links a {
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--texto-suave); text-decoration: none; font-weight: 300;
+  transition: color 0.2s;
+  position: relative; padding-bottom: 2px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 100%;
+  height: 1px; background: var(--canela);
+  transition: right 0.3s var(--ease-out);
+}
+.nav-links a:hover { color: var(--canela); }
+.nav-links a:hover::after { right: 0; }
+
+.nav-btn {
+  background: transparent; border: 1px solid var(--canela);
+  color: var(--canela); padding: 9px 22px;
+  font-family: 'Jost', sans-serif; font-size: 12px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: background 0.25s, color 0.25s;
+}
+.nav-btn:hover { background: var(--canela); color: #fff; }
+
+/* Hamburguer */
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 8px;
+  z-index: 300;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--canela);
+  transition: transform 0.35s var(--ease-out), opacity 0.25s;
+  transform-origin: center;
+}
+.nav-hamburger.aberto span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.aberto span:nth-child(2) { opacity: 0; }
+.nav-hamburger.aberto span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Menu mobile overlay */
+.nav-mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 150;
+  background: rgba(250, 245, 236, 0.98);
+  backdrop-filter: blur(8px);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 36px;
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+  pointer-events: none;
+}
+.nav-mobile-menu.visivel {
+  opacity: 1; transform: translateY(0); pointer-events: all;
+}
+.nav-mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 300; color: var(--canela);
+  text-decoration: none; letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.nav-mobile-menu a:hover { color: var(--terracota); }
+.nav-mobile-menu .nav-mobile-cta {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+  border: 1px solid var(--canela);
+  padding: 12px 32px; margin-top: 16px;
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
+}
+.reveal.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.22s; }
+.reveal-delay-3 { transition-delay: 0.34s; }
+.reveal-delay-4 { transition-delay: 0.46s; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 68px;
+}
+
+.hero-esquerda {
+  background: var(--creme);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 70px 80px 80px;
+  position: relative;
+}
+.hero-esquerda::after {
+  content: '';
+  position: absolute; right: -1px; top: 10%; bottom: 10%;
+  width: 1px; background: var(--borda);
+}
+
+.hero-origem {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 44px;
+  animation: fadeUp 0.8s 0.05s var(--ease-out) both;
+}
+.hero-origem-linha { width: 32px; height: 1px; background: var(--terracota); }
+.hero-origem-texto {
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 200;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 4.5vw, 68px);
+  line-height: 1.12; color: var(--canela);
+  font-weight: 300; margin-bottom: 28px;
+  letter-spacing: -0.01em;
+  animation: fadeUp 0.85s 0.18s var(--ease-out) both;
+}
+.hero h1 em { font-style: italic; font-weight: 300; color: var(--terracota); }
+
+.hero-desc {
+  font-size: 17px; color: var(--texto-suave);
+  font-weight: 300; line-height: 1.9;
+  max-width: 400px; margin-bottom: 48px;
+  border-left: 2px solid var(--creme-escuro);
+  padding-left: 20px;
+  animation: fadeUp 0.85s 0.3s var(--ease-out) both;
+}
+
+.hero-acoes {
+  display: flex; gap: 14px; align-items: center;
+  animation: fadeUp 0.85s 0.44s var(--ease-out) both;
+}
+
+.btn-principal {
+  background: var(--canela); color: #fff;
+  padding: 14px 34px;
+  font-family: 'Jost', sans-serif; font-size: 12px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  text-decoration: none; display: inline-block;
+  transition: background 0.25s, transform 0.2s;
+}
+.btn-principal:hover { background: var(--terracota); transform: translateY(-1px); }
+.btn-principal:active { transform: translateY(0); }
+
+.btn-ghost {
+  color: var(--canela); font-size: 12px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  text-decoration: none; font-weight: 300;
+  border-bottom: 1px solid var(--borda);
+  padding-bottom: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { color: var(--terracota); border-color: var(--terracota); }
+
+.hero-direita {
+  background: var(--branco);
+  display: flex; align-items: center; justify-content: center;
+  padding: 80px 60px;
+  flex-direction: column; gap: 32px;
+  animation: fadeUp 1s 0.2s var(--ease-out) both;
+}
+
+.logo-area { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.logo-area img { max-width: 320px; width: 100%; height: auto; }
+
+/* Placeholder logo */
+.logo-placeholder {
+  width: 300px; height: 300px;
+  border: 1px solid var(--borda);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--creme);
+}
+.logo-placeholder-inner {
+  text-align: center; padding: 24px;
+}
+.logo-placeholder-inner p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; color: var(--texto-suave);
+  font-style: italic; line-height: 1.8;
+}
+.logo-placeholder-inner span {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; font-style: normal;
+  color: var(--terracota); display: block; margin-top: 8px;
+}
+
+.hero-badge {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 24px;
+  border: 1px solid var(--borda);
+  background: var(--creme);
+}
+.hero-badge-texto {
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--texto-suave); font-weight: 200;
+}
+
+/* ─── SOBRE ─── */
+.sobre {
+  display: grid; grid-template-columns: 1fr 2fr;
+  border-top: 1px solid var(--borda);
+}
+
+.sobre-lateral {
+  background: var(--creme);
+  padding: 90px 50px;
+  border-right: 1px solid var(--borda);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.sobre-lateral-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 100px; font-weight: 300; line-height: 1;
+  color: rgba(122, 59, 30, 0.08); margin-bottom: 16px;
+  letter-spacing: -0.04em;
+}
+.sobre-lateral-label {
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 200;
+}
+
+.sobre-conteudo {
+  padding: 90px 80px 90px 70px;
+  background: var(--branco);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.sobre-conteudo h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 3vw, 44px); font-weight: 300;
+  color: var(--canela); margin-bottom: 28px;
+  line-height: 1.25; letter-spacing: -0.01em;
+}
+.sobre-conteudo h2 em { font-style: italic; }
+.sobre-conteudo p {
+  font-size: 17px; color: var(--texto-suave);
+  font-weight: 300; line-height: 1.95;
+  max-width: 540px; margin-bottom: 18px;
+}
+.sobre-conteudo p:last-child { margin-bottom: 0; }
+
+/* ─── PRODUTOS ─── */
+.produtos {
+  border-top: 1px solid var(--borda);
+  background: var(--branco);
+}
+
+.produtos-header {
+  padding: 80px 80px 60px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  border-bottom: 1px solid var(--borda);
+}
+.produtos-header-tag {
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 200; margin-bottom: 12px;
+  display: block;
+}
+.produtos-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 42px); font-weight: 300;
+  color: var(--canela); line-height: 1.2;
+}
+.produtos-header p {
+  font-size: 15px; color: var(--texto-suave); font-weight: 300;
+  max-width: 280px; text-align: right; line-height: 1.7;
+}
+
+.produtos-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+
+.produto-item {
+  padding: 60px 80px;
+  border-right: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+  transition: background 0.35s var(--ease-out);
+  cursor: default;
+}
+.produto-item:nth-child(2) { border-right: none; }
+.produto-item:nth-child(3) {
+  border-right: none; border-top: 1px solid var(--borda);
+  grid-column: 1 / -1;
+  background: var(--terracota);
+  transition: background 0.35s;
+}
+.produto-item:hover { background: var(--creme); }
+.produto-item:nth-child(3):hover { background: #b05e30; }
+
+.produto-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; color: var(--terracota); font-weight: 300;
+  letter-spacing: 0.1em; margin-bottom: 28px; display: block;
+}
+.produto-item:nth-child(3) .produto-num { color: rgba(255,255,255,0.6); }
+
+.produto-item h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 400; color: var(--canela);
+  margin-bottom: 14px; letter-spacing: -0.01em;
+}
+.produto-item:nth-child(3) h3 { color: #fff; }
+
+.produto-item p {
+  font-size: 15px; color: var(--texto-suave);
+  font-weight: 300; line-height: 1.85; max-width: 360px;
+}
+.produto-item:nth-child(3) p { color: rgba(255,255,255,0.82); }
+
+/* ─── SABORES ─── */
+.sabores {
+  border-top: 1px solid var(--borda);
+  padding: 90px 80px;
+  background: var(--creme);
+}
+
+.sabores-inner {
+  display: grid; grid-template-columns: 1fr 2fr; gap: 80px;
+  align-items: start;
+}
+
+.sabores-titulo-tag {
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 200; margin-bottom: 12px;
+  display: block;
+}
+.sabores-titulo h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 2.5vw, 38px); font-weight: 300;
+  color: var(--canela); line-height: 1.25;
+}
+.sabores-titulo h2 em { font-style: italic; }
+
+.sabores-lista {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: var(--borda);
+  border: 1px solid var(--borda);
+}
+
+.sabor-item {
+  background: var(--branco);
+  padding: 28px 32px;
+  display: flex; flex-direction: column; gap: 6px;
+  transition: background 0.25s var(--ease-out), transform 0.2s var(--ease-out);
+  cursor: default;
+  position: relative; overflow: hidden;
+}
+.sabor-item::before {
+  content: '';
+  position: absolute; left: 0; bottom: 0; top: 100%;
+  width: 2px; background: var(--terracota);
+  transition: top 0.3s var(--ease-out);
+}
+.sabor-item:hover { background: var(--creme); }
+.sabor-item:hover::before { top: 0; }
+
+.sabor-item-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 400; color: var(--canela);
+}
+.sabor-item-desc {
+  font-size: 12px; color: var(--texto-suave); font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+/* ─── COMO PEDIR ─── */
+.como-pedir {
+  border-top: 1px solid var(--borda);
+  padding: 90px 80px;
+  background: var(--branco);
+}
+
+.como-pedir-header {
+  margin-bottom: 70px;
+  display: flex; align-items: flex-start; gap: 60px;
+}
+.como-pedir-tag {
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 200; white-space: nowrap;
+  margin-top: 8px;
+}
+.como-pedir-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 44px); font-weight: 300;
+  color: var(--canela); line-height: 1.2;
+}
+
+.steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--borda);
+  border: 1px solid var(--borda);
+}
+
+.step {
+  background: var(--creme);
+  padding: 44px 36px;
+  position: relative;
+  transition: background 0.3s;
+  overflow: hidden;
+}
+.step:hover { background: var(--creme-escuro); }
+
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 56px; font-weight: 300; line-height: 1;
+  color: rgba(122,59,30,0.1); margin-bottom: 20px;
+  display: block; letter-spacing: -0.03em;
+}
+.step h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 400;
+  color: var(--canela); margin-bottom: 10px;
+}
+.step p {
+  font-size: 14px; color: var(--texto-suave);
+  font-weight: 300; line-height: 1.8;
+}
+
+/* ─── RETIRADA ─── */
+.retirada {
+  border-top: 1px solid var(--borda);
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+
+.retirada-mapa {
+  background: var(--branco);
+  padding: 80px;
+  border-right: 1px solid var(--borda);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.retirada-mapa-tag {
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 200; margin-bottom: 16px;
+  display: block;
+}
+.retirada-mapa h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 2.5vw, 38px); font-weight: 300;
+  color: var(--canela); margin-bottom: 32px; line-height: 1.2;
+}
+
+.endereco-bloco { display: flex; flex-direction: column; gap: 24px; }
+.endereco-linha { display: flex; flex-direction: column; gap: 4px; }
+.endereco-label {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 200;
+}
+.endereco-valor {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; color: var(--canela); font-weight: 300;
+  line-height: 1.4;
+}
+
+.retirada-info {
+  padding: 80px;
+  background: var(--creme);
+  display: flex; flex-direction: column; justify-content: center; gap: 32px;
+}
+.retirada-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 300; color: var(--canela);
+  margin-bottom: 4px;
+}
+.retirada-info p {
+  font-size: 15px; color: var(--texto-suave); font-weight: 300;
+  line-height: 1.85; max-width: 380px;
+}
+
+.retirada-entrega {
+  padding: 28px 32px;
+  border: 1px solid var(--borda);
+  background: var(--creme);
+}
+.retirada-entrega-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 400; color: var(--canela);
+  margin-bottom: 8px;
+}
+.retirada-entrega p {
+  font-size: 14px; color: var(--texto-suave); font-weight: 300;
+  line-height: 1.7;
+}
+
+.retirada-destaque {
+  border-left: 3px solid var(--terracota) !important;
+  background: var(--branco) !important;
+}
+.retirada-destaque a {
+  display: inline-block; margin-top: 14px;
+  font-family: 'Jost', sans-serif; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--terracota); text-decoration: none;
+  border-bottom: 1px solid var(--borda); padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+.retirada-destaque a:hover { border-color: var(--terracota); }
+
+/* ─── CTA FINAL ─── */
+.cta-final {
+  border-top: 1px solid var(--borda);
+  background: var(--canela);
+  padding: 110px 80px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-final::before {
+  content: 'Edela';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 260px; font-weight: 300; font-style: italic;
+  color: rgba(255,255,255,0.04);
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap; pointer-events: none;
+  letter-spacing: -0.05em;
+}
+
+.cta-final-tag {
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(253,243,220,0.6); font-weight: 200; margin-bottom: 20px;
+  display: block;
+}
+.cta-final h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 5vw, 62px); font-weight: 300;
+  color: var(--creme); margin-bottom: 20px;
+  line-height: 1.15; position: relative; z-index: 1;
+}
+.cta-final h2 em { font-style: italic; color: #F5C9A0; }
+.cta-final p {
+  font-size: 17px; color: rgba(250,245,236,0.7);
+  font-weight: 200; margin-bottom: 50px;
+  max-width: 420px; margin-left: auto; margin-right: auto;
+  line-height: 1.85; position: relative; z-index: 1;
+}
+
+.btn-whatsapp {
+  background: #fff; color: var(--canela);
+  padding: 16px 44px;
+  font-family: 'Jost', sans-serif; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  text-decoration: none; display: inline-flex;
+  align-items: center; gap: 12px;
+  transition: background 0.25s, transform 0.2s;
+  font-weight: 300;
+  position: relative; z-index: 1;
+}
+.btn-whatsapp:hover { background: var(--creme); transform: translateY(-2px); }
+.btn-whatsapp:active { transform: translateY(0); }
+.btn-whatsapp svg { flex-shrink: 0; }
+
+/* ─── BOTÃO FLUTUANTE WHATSAPP ─── */
+.fab-whatsapp {
+  position: fixed; bottom: 28px; right: 28px; z-index: 190;
+  width: 54px; height: 54px;
+  background: #25D366; color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s;
+  opacity: 0; transform: scale(0.8) translateY(10px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), box-shadow 0.25s;
+}
+.fab-whatsapp.visivel {
+  opacity: 1; transform: scale(1) translateY(0);
+}
+.fab-whatsapp:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,211,102,0.5);
+}
+.fab-whatsapp svg { width: 26px; height: 26px; }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--borda);
+  padding: 40px 80px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-marca {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; color: var(--canela); font-weight: 300;
+}
+.footer-marca span {
+  display: block; font-family: 'Jost', sans-serif;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--terracota); font-weight: 200; margin-top: 2px;
+}
+.footer-info {
+  text-align: right; font-size: 12px;
+  color: var(--texto-suave); font-weight: 300;
+  line-height: 1.7; letter-spacing: 0.04em;
+}
+.footer-info a {
+  color: var(--terracota); text-decoration: none;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.footer-info a:hover { opacity: 0.7; }
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIVO ─── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links, .nav-btn { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-esquerda { padding: 60px 28px 50px; order: 2; }
+  .hero-esquerda::after { display: none; }
+  .hero-direita { padding: 60px 28px 40px; order: 1; }
+  .hero h1 { font-size: 38px; }
+
+  .sobre { grid-template-columns: 1fr; }
+  .sobre-lateral { padding: 40px 28px 10px; }
+  .sobre-lateral-num { font-size: 60px; }
+  .sobre-conteudo { padding: 32px 28px 60px; }
+
+  .produtos-header {
+    padding: 50px 28px 40px;
+    flex-direction: column; align-items: flex-start; gap: 16px;
+  }
+  .produtos-header p { text-align: left; max-width: 100%; }
+  .produtos-grid { grid-template-columns: 1fr; }
+  .produto-item { padding: 40px 28px; border-right: none; }
+  .produto-item:nth-child(2) { border-top: 1px solid var(--borda); }
+
+  .sabores { padding: 60px 28px; }
+  .sabores-inner { grid-template-columns: 1fr; gap: 36px; }
+  .sabores-lista { grid-template-columns: 1fr 1fr; }
+
+  .como-pedir { padding: 60px 28px; }
+  .como-pedir-header { flex-direction: column; gap: 10px; }
+  .steps { grid-template-columns: 1fr 1fr; }
+
+  .retirada { grid-template-columns: 1fr; }
+  .retirada-mapa { padding: 60px 28px; border-right: none; border-bottom: 1px solid var(--borda); }
+  .retirada-info { padding: 50px 28px; }
+
+  .cta-final { padding: 80px 28px; }
+  .cta-final::before { font-size: 100px; }
+
+  footer { padding: 32px 28px; flex-direction: column; gap: 16px; text-align: center; }
+  .footer-info { text-align: center; }
+
+  .fab-whatsapp { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+}
+
+@media (max-width: 520px) {
+  .sabores-lista { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .hero-acoes { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="#" class="nav-marca" aria-label="Doces da Vovó Edela">
+    <div class="nav-marca-nome">Doces da Vovó Edela</div>
+    <div class="nav-marca-sub">Receitas Alemãs · Chapada dos Guimarães</div>
+  </a>
+  <div class="nav-links">
+    <a href="#produtos">Produtos</a>
+    <a href="#pedir">Como pedir</a>
+    <a href="#retirada">Retirada</a>
+    <a href="https://instagram.com/docesdavovoedela" target="_blank" rel="noopener">Instagram</a>
+  </div>
+  <a href="#cta" class="nav-btn">Fazer encomenda</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Menu mobile -->
+<div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#produtos" class="nav-mobile-link">Produtos</a>
+  <a href="#pedir" class="nav-mobile-link">Como pedir</a>
+  <a href="#retirada" class="nav-mobile-link">Retirada</a>
+  <a href="https://instagram.com/docesdavovoedela" target="_blank" rel="noopener" class="nav-mobile-link">Instagram</a>
+  <a href="#cta" class="nav-mobile-link nav-mobile-cta">Fazer encomenda</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero textura">
+  <div class="hero-esquerda">
+    <div class="hero-origem">
+      <div class="hero-origem-linha"></div>
+      <div class="hero-origem-texto">Chapada dos Guimarães · Mato Grosso</div>
+    </div>
+    <h1>
+      Receitas que<br>o tempo<br><em>não apaga</em>
+    </h1>
+    <p class="hero-desc">
+      Cucas artesanais e biscoitos caseiros feitos com as receitas alemãs que a Vovó Edela guardou por décadas. Cada encomenda, um pedaço dessa história.
+    </p>
+    <div class="hero-acoes">
+      <a href="#cta" class="btn-principal">Fazer encomenda</a>
+      <a href="#produtos" class="btn-ghost">Ver produtos</a>
+    </div>
+  </div>
+
+  <div class="hero-direita">
+    <div class="logo-area">
+      <img src="logo.png" alt="Doces da Vovó Edela"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-texto">Tradição familiar · Feito em casa · Receitas alemãs</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOBRE ─── -->
+<section class="sobre">
+  <div class="sobre-lateral textura reveal">
+    <div class="sobre-lateral-num">01</div>
+    <div class="sobre-lateral-label">Nossa história</div>
+  </div>
+  <div class="sobre-conteudo">
+    <h2 class="reveal">Uma receita que atravessou <em>gerações</em></h2>
+    <p class="reveal reveal-delay-1">A Vovó Edela carrega na memória — e nas mãos — as receitas trazidas pela família alemã que se estabeleceu no coração do Mato Grosso. Cada cuca, cada biscoito é feito com os mesmos ingredientes de sempre: farinha, manteiga, carinho e muito amor.</p>
+    <p class="reveal reveal-delay-2">Hoje, Anna Mery e Jayne Sandra continuam essa tradição, levando o sabor de casa direto até você em Chapada dos Guimarães.</p>
+  </div>
+</section>
+
+<!-- ─── PRODUTOS ─── -->
+<section class="produtos" id="produtos">
+  <div class="produtos-header reveal">
+    <div class="produtos-header-left">
+      <span class="produtos-header-tag">O que fazemos</span>
+      <h2>Feito em casa,<br>com receita de família</h2>
+    </div>
+    <p>Cada produto sai do forno com ingredientes frescos e o carinho que só a tradição de família sabe dar.</p>
+  </div>
+
+  <div class="produtos-grid">
+    <div class="produto-item reveal">
+      <span class="produto-num">— 01</span>
+      <h3>Cucas Artesanais</h3>
+      <p>A cuca alemã tradicional, com massa fofa e recheio generoso. Disponível em seis sabores diferentes, sempre feita com ingredientes selecionados.</p>
+    </div>
+    <div class="produto-item reveal reveal-delay-1">
+      <span class="produto-num">— 02</span>
+      <h3>Biscoitos Caseiros</h3>
+      <p>Crocantes, saborosos e feitos com a receita que a família preserva há décadas. Perfeitos para qualquer momento do dia.</p>
+    </div>
+    <div class="produto-item reveal reveal-delay-2">
+      <span class="produto-num">— 03</span>
+      <h3>Saindo do Forno — em primeira mão</h3>
+      <p>Novidades que nascem da mesma cozinha e do mesmo carinho de sempre. Antes de virar tradição, alguém precisa ser o primeiro a provar. Acompanhe e experimente antes de todo mundo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SABORES ─── -->
+<section class="sabores textura" id="sabores">
+  <div class="sabores-inner">
+    <div class="sabores-titulo reveal">
+      <span class="sabores-titulo-tag">Cucas</span>
+      <h2>Escolha seu sabor <em>favorito</em></h2>
+    </div>
+    <div class="sabores-lista reveal reveal-delay-1">
+      <div class="sabor-item">
+        <div class="sabor-item-nome">Banana</div>
+        <div class="sabor-item-desc">Clássico e irresistível</div>
+      </div>
+      <div class="sabor-item">
+        <div class="sabor-item-nome">Uva</div>
+        <div class="sabor-item-desc">Suave e perfumado</div>
+      </div>
+      <div class="sabor-item">
+        <div class="sabor-item-nome">Doce de Leite</div>
+        <div class="sabor-item-desc">Cremoso e especial</div>
+      </div>
+      <div class="sabor-item">
+        <div class="sabor-item-nome">Goiabada</div>
+        <div class="sabor-item-desc">Tropical e marcante</div>
+      </div>
+      <div class="sabor-item">
+        <div class="sabor-item-nome">Maçã</div>
+        <div class="sabor-item-desc">Delicado e aromático</div>
+      </div>
+      <div class="sabor-item">
+        <div class="sabor-item-nome">Abacaxi</div>
+        <div class="sabor-item-desc">Refrescante e diferente</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMO PEDIR ─── -->
+<section class="como-pedir" id="pedir">
+  <div class="como-pedir-header reveal">
+    <span class="como-pedir-tag">Encomendas</span>
+    <h2>Como fazer a sua encomenda</h2>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <span class="step-num">01</span>
+      <h3>Escolha o sabor</h3>
+      <p>Banana, uva, doce de leite, goiabada, maçã ou abacaxi — qual chama mais atenção?</p>
+    </div>
+    <div class="step reveal reveal-delay-1">
+      <span class="step-num">02</span>
+      <h3>Fale pelo WhatsApp</h3>
+      <p>Mande uma mensagem. A gente responde com preços, tamanhos e disponibilidade.</p>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <span class="step-num">03</span>
+      <h3>Combine os detalhes</h3>
+      <p>Tamanho, quantidade e data de retirada — tudo alinhado do jeito que funciona pra você.</p>
+    </div>
+    <div class="step reveal reveal-delay-3">
+      <span class="step-num">04</span>
+      <h3>Retire fresquinho</h3>
+      <p>Retire diretamente em Chapada dos Guimarães, no horário combinado no pedido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RETIRADA ─── -->
+<section class="retirada" id="retirada">
+  <div class="retirada-mapa">
+    <span class="retirada-mapa-tag reveal">Onde estamos</span>
+    <h2 class="reveal reveal-delay-1">Retirada em<br>Chapada dos Guimarães</h2>
+    <div class="endereco-bloco">
+      <div class="endereco-linha reveal reveal-delay-2">
+        <span class="endereco-label">Cidade</span>
+        <span class="endereco-valor">Chapada dos Guimarães · MT</span>
+      </div>
+      <div class="endereco-linha reveal reveal-delay-3">
+        <span class="endereco-label">Bairro</span>
+        <span class="endereco-valor">Santa Cruz<br>Chapada dos Guimarães – MT</span>
+      </div>
+      <div class="endereco-linha reveal reveal-delay-4">
+        <span class="endereco-label">Horário de retirada</span>
+        <!-- SUBSTITUA pelos horários reais -->
+        <span class="endereco-valor">[ Combinar pelo WhatsApp ]</span>
+      </div>
+    </div>
+  </div>
+  <div class="retirada-info textura">
+    <div class="reveal">
+      <h3>Retirada local</h3>
+      <p>As encomendas são retiradas diretamente em Chapada dos Guimarães. O horário é combinado na hora do pedido, garantindo que sua cuca esteja fresquinha.</p>
+    </div>
+    <div class="retirada-entrega reveal reveal-delay-1">
+      <div class="retirada-entrega-titulo">Forma de pagamento</div>
+      <p>Para confirmar sua encomenda, realizamos a cobrança de 50% no momento do pedido e os 50% restantes na retirada.</p>
+    </div>
+    <div class="retirada-entrega retirada-destaque reveal reveal-delay-2">
+      <div class="retirada-entrega-titulo">Saiu do forno hoje?</div>
+      <p>Quando tem fornada fresca, a gente anuncia nos <strong>stories do Instagram</strong>. Às vezes dá pra comprar pedaços avulsos — sem precisar de encomenda. Segue lá pra não perder!</p>
+      <a href="https://instagram.com/docesdavovoedela" target="_blank" rel="noopener">Seguir no Instagram →</a>
+    </div>
+    <p class="reveal reveal-delay-3" style="font-size:14px;color:var(--texto-suave);font-weight:300;line-height:1.8;">Para garantir a sua, entre em contato com pelo menos 2 dias de antecedência. Assim conseguimos separar tudo com o carinho que você merece.</p>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ─── -->
+<section class="cta-final" id="cta">
+  <span class="cta-final-tag reveal">Encomende agora</span>
+  <h2 class="reveal reveal-delay-1">Que tal uma cuca<br><em>fresquinha essa semana?</em></h2>
+  <p class="reveal reveal-delay-2">Fale com a gente pelo WhatsApp. Atendemos com carinho e respondemos rapidinho.</p>
+  <!--
+    SUBSTITUA o número pelo WhatsApp real:
+    Formato: 55 + DDD + número (ex: 5565999990000)
+  -->
+  <a href="https://wa.me/5565996041733?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20encomenda%20de%20cucas." class="btn-whatsapp reveal reveal-delay-3">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Fazer encomenda pelo WhatsApp
+  </a>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-marca">
+    Doces da Vovó Edela
+    <span>Receitas Alemãs · Desde sempre</span>
+  </div>
+  <div class="footer-info">
+    Chapada dos Guimarães · MT<br>
+    Atendimento pelo WhatsApp<br>
+    <a href="https://instagram.com/docesdavovoedela" target="_blank" rel="noopener">@docesdavovoedela</a>
+  </div>
+</footer>
+
+<!-- ─── BOTÃO FLUTUANTE WHATSAPP ─── -->
+<a href="https://wa.me/5565996041733?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20encomenda%20de%20cucas."
+   class="fab-whatsapp" id="fabWhatsapp"
+   aria-label="Falar pelo WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── NAV: sombra ao scrollar ───
+  const nav = document.getElementById('nav');
+  const fab = document.getElementById('fabWhatsapp');
+
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY > 20;
+    nav.classList.toggle('scrolled', scrolled);
+
+    // FAB aparece após 300px
+    const showFab = window.scrollY > 300;
+    fab.classList.toggle('visivel', showFab);
+  }, { passive: true });
+
+  // ─── HAMBURGUER MENU ───
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let menuAberto = false;
+
+  function toggleMenu(forcar) {
+    menuAberto = forcar !== undefined ? forcar : !menuAberto;
+    hamburger.classList.toggle('aberto', menuAberto);
+    mobileMenu.classList.toggle('visivel', menuAberto);
+    mobileMenu.style.display = menuAberto ? 'flex' : '';
+    hamburger.setAttribute('aria-expanded', menuAberto);
+    mobileMenu.setAttribute('aria-hidden', !menuAberto);
+    document.body.style.overflow = menuAberto ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', function() { toggleMenu(); });
+
+  // Fechar ao clicar nos links
+  mobileMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() { toggleMenu(false); });
+  });
+
+  // Fechar com Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && menuAberto) toggleMenu(false);
+  });
+
+  // ─── SCROLL REVEAL ───
+  const revelar = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visivel');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -48px 0px'
+    });
+
+    revelar.forEach(function(el) { observer.observe(el); });
+  } else {
+    // Fallback para browsers sem IntersectionObserver
+    revelar.forEach(function(el) { el.classList.add('visivel'); });
+  }
+
+})();
+</script>
+</body>
+</html>
