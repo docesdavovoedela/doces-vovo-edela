@@ -79,7 +79,7 @@ nav {
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
   border-bottom: 1px solid var(--borda);
   padding: 0 60px;
-  height: 68px;
+  height: 76px;
   display: flex; align-items: center; justify-content: space-between;
   transition: box-shadow 0.3s;
 }
@@ -88,14 +88,19 @@ nav.scrolled {
 }
 
 .nav-marca {
-  display: flex; align-items: center;
+  display: flex; flex-direction: column; gap: 2px;
   text-decoration: none;
 }
 .nav-marca-logo {
-  height: 48px; width: auto;
+  height: 56px; width: auto;
+}
+.nav-marca-sub {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--terracota);
 }
 .nav-marca-nome { display: none; }
-.nav-marca-sub  { display: none; }
 
 .nav-links { display: flex; align-items: center; gap: 36px; }
 .nav-links a {
@@ -187,7 +192,7 @@ nav.scrolled {
 .hero {
   min-height: 100vh;
   display: grid; grid-template-columns: 1fr 1fr;
-  padding-top: 68px;
+  padding-top: 76px;
 }
 
 .hero-esquerda {
@@ -760,8 +765,9 @@ footer {
   .hero-foto-card { border-radius: 0; box-shadow: none; height: 200px; }
   .hero-foto-principal { height: 200px; border-radius: 0; object-fit: cover; }
   .hero-foto-badge { display: none; }
-  .nav-marca-logo { height: 40px; }
-  .hero h1 { font-size: 36px; margin-bottom: 14px; }
+  .nav-marca-logo { height: 50px; }
+  .nav-marca-sub { display: none; }
+  .hero h1 { font-size: 28px; margin-bottom: 14px; line-height: 1.2; }
   .hero-origem { display: none; }
   .hero-desc { margin-bottom: 20px; font-size: 14px; line-height: 1.65; }
 
@@ -817,7 +823,8 @@ footer {
 <!-- ─── NAV ─── -->
 <nav id="nav">
   <a href="#" class="nav-marca" aria-label="Doces da Vovó Edela">
-    <img src="logo-horizontal.png" alt="Doces da Vovó Edela" class="nav-marca-logo" height="36" loading="eager">
+    <img src="logo-horizontal.png" alt="Doces da Vovó Edela" class="nav-marca-logo" height="56" loading="eager">
+    <span class="nav-marca-sub">Chapada dos Guimarães</span>
   </a>
   <div class="nav-links">
     <a href="#produtos">Produtos</a>
