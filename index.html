@@ -265,9 +265,15 @@ nav.scrolled {
 .hero-direita {
   background: var(--branco);
   display: flex; align-items: center; justify-content: center;
-  padding: 80px 60px;
-  flex-direction: column; gap: 32px;
+  padding: 0;
+  flex-direction: column; gap: 0;
   animation: fadeUp 1s 0.2s var(--ease-out) both;
+  overflow: hidden; position: relative;
+}
+
+.hero-foto-principal {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
 }
 
 .logo-area { display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -396,6 +402,11 @@ nav.scrolled {
 }
 .produto-item:hover { background: var(--creme); }
 .produto-item:nth-child(3):hover { background: #b05e30; }
+
+.produto-foto {
+  width: calc(100% + 160px); margin: -60px -80px 36px;
+  height: 260px; object-fit: cover; display: block;
+}
 
 .produto-num {
   font-family: 'Cormorant Garamond', serif;
@@ -733,7 +744,8 @@ footer {
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero-esquerda { padding: 24px 28px 40px; order: 2; }
   .hero-esquerda::after { display: none; }
-  .hero-direita { padding: 16px 28px 12px; order: 1; }
+  .hero-direita { padding: 0; order: 1; height: 260px; }
+  .hero-foto-principal { height: 260px; }
   .hero h1 { font-size: 42px; margin-bottom: 16px; }
   .hero-origem { margin-bottom: 16px; }
   .hero-desc { margin-bottom: 24px; font-size: 15px; line-height: 1.7; }
@@ -741,6 +753,7 @@ footer {
   .logo-desktop { display: none; }
   .logo-mobile { display: block; max-width: 200px; }
   .hero-badge { display: none; }
+  .produto-foto { width: calc(100% + 56px); margin: -40px -28px 28px; height: 220px; }
 
   .sobre { grid-template-columns: 1fr; }
   .sobre-lateral { padding: 40px 28px 10px; }
@@ -833,13 +846,7 @@ footer {
   </div>
 
   <div class="hero-direita">
-    <div class="logo-area">
-      <img src="logo.png" alt="Doces da Vovó Edela" class="logo-desktop" width="640" height="640" fetchpriority="high">
-      <img src="logo-horizontal.png" alt="Doces da Vovó Edela" class="logo-mobile" width="938" height="313" fetchpriority="high">
-    </div>
-    <div class="hero-badge">
-      <div class="hero-badge-texto">Tradição familiar · Feito em casa · Receitas alemãs</div>
-    </div>
+    <img src="cuca-banana.jpg" alt="Cuca de Banana artesanal da Vovó Edela" class="hero-foto-principal" width="1200" height="668" fetchpriority="high">
   </div>
 </section>
 
@@ -868,11 +875,13 @@ footer {
 
   <div class="produtos-grid">
     <div class="produto-item reveal">
+      <img src="cuca-goiabada.jpg" alt="Cuca artesanal de goiabada" class="produto-foto" width="1200" height="668" loading="lazy">
       <span class="produto-num">— 01</span>
       <h3>Cucas Artesanais</h3>
       <p>A cuca alemã tradicional, com massa fofa e recheio generoso. Disponível em seis sabores diferentes, sempre feita com ingredientes selecionados.</p>
     </div>
     <div class="produto-item reveal reveal-delay-1">
+      <img src="cuca-uva.jpg" alt="Cuca artesanal de uva" class="produto-foto" width="1200" height="668" loading="lazy">
       <span class="produto-num">— 02</span>
       <h3>Biscoitos Caseiros</h3>
       <p>Crocantes, saborosos e feitos com a receita que a família preserva há décadas. Perfeitos para qualquer momento do dia.</p>
